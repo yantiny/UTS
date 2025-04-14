@@ -33,7 +33,7 @@ export default function MaterialsSection() {
             alt="Dining Set" 
             width={300} 
             height={350} 
-            className="rounded-xl shadow-2xl" 
+            className="rounded-xl shadow-2xl translate-21 -translate-x-3" 
           />
           
           <div className="absolute -left-20 flex flex-col gap-6">
@@ -41,18 +41,18 @@ export default function MaterialsSection() {
             <Image 
               src="/material1.png" 
               alt="Chair 1" 
-              width={130} 
-              height={130} 
-              className="rounded-xl shadow-lg -translate-y-10" 
+              width={150} 
+              height={500} 
+              className="shadow-lg -translate-y-3 -translate-x-5" 
               
             />
             {/* Small Image 2 - Bottom Left */}
             <Image 
               src="/material2.png" 
               alt="Sofa" 
-              width={130} 
+              width={150} 
               height={200} 
-              className="rounded-xl shadow-lg -translate-x-1" 
+              className="shadow-lg -translate-x-5" 
             />
           </div>
         </div>
