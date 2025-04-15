@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function MaterialsSection() {
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-12">
+    <section className="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-8 md:gap-12">
       {/* Left Content */}
       <div className="flex-1">
 

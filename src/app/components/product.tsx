@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Plus } from "lucide-react";
 
@@ -13,7 +13,8 @@ const products = [
   { id: 4, name: "Nyantuy Chair", price: "$921", image: "/chair4.png" },
 ];
 
-export default function product() {
+export default function Product() {
+  const [activeCategory, setActiveCategory] = useState("Chair");
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -21,9 +22,8 @@ export default function product() {
       sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
-
   const scrollRight = () => {
-    if (sliderRef.current) {
+    if (sliderRef.current) {     
       sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
@@ -32,28 +32,28 @@ export default function product() {
     <section className="py-12 px-6 max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold text-center">Best Selling Product</h2>
 
-      {/* Categories */}
-      <div className="flex justify-center space-x-4 my-6">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className="px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-200 transition"
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+        {/* Categories */}
+        <div className="flex justify-center my-6">
+          <div className="flex bg-gray-100 rounded-full p-1">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-5 py-2 rounded-full text-sm transition
+                  ${
+                    activeCategory === category
+                      ? "bg-white text-black font-medium"
+                      : "text-gray-600"
+                  }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
 
       {/* Slider */}
       <div className="relative">
-        {/* Left Button */}
-        <button
-          onClick={scrollLeft}
-          className="absolute left-[-20px] top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md"
-        >
-          ⬅
-        </button>
-
         {/* Product Container */}
         <div
           ref={sliderRef}
@@ -63,7 +63,7 @@ export default function product() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[250px] flex-shrink-0 rounded-lg shadow-lg p-4 bg-white scroll-snap-align-start relative"
+              className="min-w-[250px] flex-shrink-0 rounded-lg p-4 bg-white scroll-snap-align-start relative"
             >
               <Image
                 src={product.image}
@@ -73,16 +73,16 @@ export default function product() {
                 className="mx-auto mb-4"
                 unoptimized
               />
-              
-              {/* Text Container (Semua rata kiri) */}
+
+              {/* Text Container */}
               <div className="text-left">
                 <span className="text-gray-400 text-sm">Chair</span>
                 <h3 className="font-semibold text-lg">{product.name}</h3>
-                <div className="text-yellow-400 mb-8">★★★★★</div> {/* Tambahkan margin bawah */}
+                <div className="text-yellow-400 mb-8">★★★★★</div>
                 <p className="text-xl font-bold">{product.price}</p>
               </div>
 
-              {/* Tombol Plus di Kanan Bawah */}
+              {/* Tombol Plus */}
               <button className="absolute bottom-4 right-4 bg-black text-white w-10 h-10 flex items-center justify-center rounded-full text-2xl shadow-lg">
                 <Plus size={24} />
               </button>
@@ -93,9 +93,9 @@ export default function product() {
         {/* Right Button */}
         <button
           onClick={scrollRight}
-          className="absolute right-[-20px] top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md"
+          className="absolute right-[-30px] top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md"
         >
-          ➡
+          →
         </button>
       </div>
 
